@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    width: 300px;
+}
+
+.grid-item {
+    border: 1px solid #000;
+    padding: 15px 5px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+.grid-container1 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    width: 300px;
+}
+
+.grid-item1 {
+    border: 1px solid #000;
+    padding: 15px 5px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
