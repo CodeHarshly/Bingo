@@ -11,7 +11,8 @@ function checkWinner(){
         for(let j =0; j < 5; j++){
             PlayerSum += PlayerSolbd[i][j];
             if(PlayerSum == 4){
-
+                var word = "You win!";
+            wordContainer.innerHTML = word;
             }
         }
     }
@@ -20,7 +21,8 @@ function checkWinner(){
         for(let j =0; j < 5; j++){
             PlayerSum += PlayerSolbd[j][i];
             if(PlayerSum == 4){
-
+                var word = "You win!";
+                wordContainer.innerHTML = word;
             }
         }
     }
@@ -28,14 +30,16 @@ function checkWinner(){
     for(let i = 0; i < 5; i++){
         PlayerSum += PlayerSolbd[i][i];
         if(PlayerSum == 4){
-
+            var word = "You win!";
+            wordContainer.innerHTML = word;
         }
     }
     PlayerSum=0;
     for(let i = 0; i < 5; i++){
         PlayerSum += PlayerSolbd[i][4-i];
         if(PlayerSum == 4){
-
+            var word = "You win!";
+            wordContainer.innerHTML = word;
         }
     }
     // check bot board
@@ -44,7 +48,8 @@ function checkWinner(){
         for(let j =0; j < 5; j++){
             BotSum += BotSolbd[i][j];
             if(BotSum == 4){
-
+                var word = "Bot win!";
+                wordContainer.innerHTML = word;
             }
         }
     }
@@ -53,7 +58,8 @@ function checkWinner(){
         for(let j =0; j < 5; j++){
             BotSum += BotSolbd[j][i];
             if(BotSum == 4){
-
+                var word = "Bot win!";
+                wordContainer.innerHTML = word;
             }
         }
     }
@@ -61,14 +67,16 @@ function checkWinner(){
     for(let i = 0; i < 5; i++){
         BotSum += BotSolbd[i][i];
         if(BotSum == 4){
-
+            var word = "Bot win!";
+            wordContainer.innerHTML = word;
         }
     }
     BotSum=0;
     for(let i = 0; i < 5; i++){
         BotSum += BotSolbd[i][4-i];
         if(BotSum == 4){
-
+            var word = "Bot win!";
+            wordContainer.innerHTML = word;
         }
     }
 }
@@ -189,6 +197,9 @@ let BotSolbd = [
 ];
 let PlayerSum;
 let BotSum;
+
+var wordContainer = document.getElementById("wordContainer");
+
 // Shuffle the element randomly
 shuffleArray(playerBoard);
 shuffleArray(BotBoard);
