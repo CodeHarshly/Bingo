@@ -12,6 +12,7 @@ h5 {
 }
 .image{
     width: 50%;
+    filter: drop-shadow(10px 10px 30px yellow) ;
 }
 .btn {
     padding: 10px 20px;
