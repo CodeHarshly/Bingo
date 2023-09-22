@@ -4,7 +4,41 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+function checkWinner(){
+    
+    for(let i = 0; i < 5; i++){
+        PlayerSum=0;
+        for(let j =0; j < 5; j++){
+            PlayerSum += PlayerSolbd[i][j];
+            if(PlayerSum == 4){
 
+            }
+        }
+    }
+    for(let i = 0; i < 5; i++){
+        PlayerSum=0;
+        for(let j =0; j < 5; j++){
+            PlayerSum += PlayerSolbd[j][i];
+            if(PlayerSum == 4){
+
+            }
+        }
+    }
+    PlayerSum=0;
+    for(let i = 0; i < 5; i++){
+        PlayerSum += PlayerSolbd[i][i];
+        if(PlayerSum == 4){
+
+        }
+    }
+    PlayerSum=0;
+    for(let i = 0; i < 5; i++){
+        PlayerSum += PlayerSolbd[i][4-i];
+        if(PlayerSum == 4){
+
+        }
+    }
+}
 function addValue(value){
   let k = 0, j = 0;
   for(let i = 0; i < 25; i++){
@@ -36,6 +70,7 @@ function addValue(value){
         }
     }
   }
+  checkWinner();
   for(let i = 0; i < 25; i++){
     if(playerBoard[i] == value){
         if(i >= 20 && i <= 24){
@@ -65,6 +100,7 @@ function addValue(value){
         }
     }
   }
+  checkWinner();
   const gridContainer1 = document.getElementById('grid-container1');
 
 // Display bot board by Creating and appending grid items with shuffled numbers
@@ -78,25 +114,29 @@ for (let j = 0; j < 5; j++) {
 }
 }
 function botturn(){
-    let check = true;
-    while(check){
+    let whilecheck = true;
+    while(whilecheck){
+        let check= true;
         const randomNumber = Math.floor(Math.random() * 25) + 1;
-        for(let i = 0; i < 25; i++){
+        for(let i = 0; i < UsedNumber.length; i++){
             if(UsedNumber[i] == randomNumber)
             {
-                UsedNumber[i] = 0;
-                addValue(randomNumber);
                 check = false;
                 break;
             }
         }
-        
+        if(check){
+            addValue(randomNumber);
+            whilecheck = false;
+        }
     }
+        
 }
+
 // Create an board for player and bot 
 const playerBoard = Array.from({ length: 25 }, (_, i) => i + 1); // filled with 1 to 25 number in ascending order
 const BotBoard = Array.from({ length: 25 }, (_, i) => i + 1);  // filled with 1 to 25 number in ascending order
-let UsedNumber = Array.from({ length: 25 }, (_, i) => i + 1);  // filled with 1 to 25 number in ascending order
+let UsedNumber = []; //Array.from({ length: 25 }, (_, i) => i + 1);  // filled with 1 to 25 number in ascending order
 //const UsedNumber = Array(25).fill(0); //filled with zero element
 //const BotSolbd = Array(25).fill(0);  //filled with zero element
 let PlayerSolbd = [
@@ -113,6 +153,8 @@ let BotSolbd = [
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0]
 ];
+let PlayerSum;
+let BotSum;
 // Shuffle the element randomly
 shuffleArray(playerBoard);
 shuffleArray(BotBoard);
@@ -152,14 +194,18 @@ gridItems.forEach((item) => {
 
         // Display the clicked number below the grid
         clickedNumber.textContent = `You clicked on number ${clickedNum}`;
-        for(let i = 0; i < 25; i++){
+        let check = true;
+        for(let i = 0; i < UsedNumber.length; i++){
             if(UsedNumber[i] == clickedNum)
             {
-                UsedNumber[i] = 0;
-                addValue(clickedNum);
-                botturn();
-                
+                check = false;
+                break;
             }
+        }
+        if(check){
+            UsedNumber.push(clickedNum);
+            addValue(clickedNum);
+            botturn();
         }
             
     });
