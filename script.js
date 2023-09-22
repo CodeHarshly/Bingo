@@ -203,6 +203,17 @@ function botturn(){
         
 }
 
+function displayImageAtPosition(src, x, y) {
+    const image = new Image();
+    image.src = src;
+    image.style.left = x - 20 + 'px';
+    image.style.top = y - 20 + 'px';
+    // Append the image to the container
+    const container = document.getElementById('imageContainer');
+    container.appendChild(image);
+}
+
+
 // Create an board for player and bot 
 const playerBoard = Array.from({ length: 25 }, (_, i) => i + 1); // filled with 1 to 25 number in ascending order
 const BotBoard = Array.from({ length: 25 }, (_, i) => i + 1);  // filled with 1 to 25 number in ascending order
@@ -275,25 +286,31 @@ gridItems.forEach((item) => {
             const backgroundImage = item.style.backgroundImage;
             const clickedNum = parseInt(backgroundImage.match(/\d+/)[0]);
 
-            const clickX = event.clientX - gridContainer.getBoundingClientRect().left;
-            const clickY = event.clientY - gridContainer.getBoundingClientRect().top;
-            crossLine.style.left = `${clickX}px`;
-            crossLine.style.top = `${clickY}px`;
+            const clickX = item.offsetLeft + item.offsetWidth / 2;
+            const clickY = item.offsetTop + item.offsetHeight / 2;
+            // Display the cross-line
+            //const crossLine = document.querySelector('.cross-line');
+            //crossLine.style.display = 'block';
+
+            // Position the cross-line over the clicked grid item
+            //crossLine.style.top = item.offsetTop + 'px';
+            //crossLine.style.left = item.offsetLeft + 'px';
 
             // Display the cross-line
-            crossLine.style.display = 'block';
+            displayImageAtPosition('images/Cut.png', clickX, clickY);
+            //crossLine.style.display = 'block';
             
-            document.getElementById("clickXValue").textContent = `Click X: ${clickX}px`;
-            document.getElementById("clickYValue").textContent = `Click Y: ${clickY}px`;
-
+            //document.getElementById("clickXValue").textContent = `Click X: ${clickX}px`;
+            //document.getElementById("clickYValue").textContent = `Click Y: ${clickY}px`;
+            
             // Display the clicked number below the grid
-            clickedNumber.textContent = `You clicked on number ${clickedNum}`;
+            //clickedNumber.textContent = `You clicked on number ${clickedNum}`;
             let check = true;
             for(let i = 0; i < UsedNumber.length; i++){
                 if(UsedNumber[i] == clickedNum)
                 {
                     check = false;
-                    break;
+                    break;                  
                 }
             }
             if(check){
@@ -327,4 +344,3 @@ startGame.addEventListener('click', () => {
     fonthide2.style.display = 'block';
     
 });
-

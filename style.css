@@ -18,6 +18,14 @@ h5 {
     font-size: 16px;
     margin: 10px;
 }
+#start-button{
+    
+    padding: 10px;
+}
+#reset-button{
+    display: none;
+    padding: 5px;
+}
 .BingoContent {
     display: flex;
     justify-content: space-evenly;
@@ -28,6 +36,7 @@ h5 {
     grid-template-columns: repeat(5, 1fr);
     gap: 5px;
     width: 300px;
+    z-index: 90;
 }
 #grid-container {
     display: none;
@@ -54,31 +63,17 @@ h5 {
     font-size: 16px;
     cursor: pointer;
 }
-.cross-line {
-    position: absolute;
-    display: none;
-  }
-  
-  .horizontal-line,
-  .vertical-line {
-    position: absolute;
-    background-color: red;
-  }
-  .horizontal-line {
-    height: 2px; /* Adjust as needed */
+.imageContainer{
+    position: relative;
     width: 100%;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-  }
-  .vertical-line {
-    width: 2px; /* Adjust as needed */
     height: 100%;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-  }
-  
+}
+#imageContainer img{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 99;
+}
 .selectedNum{
     width: 260px;
     display: flex;
@@ -115,4 +110,21 @@ h5 {
     display: none;
     font-size: 16px;
     font-weight: 500;
+}
+#wordContainer {
+    font-size: 16px;
+    font-weight: 900;
+    animation: blink1 2s infinite;
+}
+
+@keyframes blink1 {
+    0% {
+        color: red;
+    }
+    50% {
+        color: lime;
+    }
+    100% {
+        color: red;
+    }
 }
