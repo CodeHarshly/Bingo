@@ -5,7 +5,7 @@ function shuffleArray(array) {
     }
 }
 function checkWinner(){
-    
+    // check player board
     for(let i = 0; i < 5; i++){
         PlayerSum=0;
         for(let j =0; j < 5; j++){
@@ -38,7 +38,41 @@ function checkWinner(){
 
         }
     }
+    // check bot board
+    for(let i = 0; i < 5; i++){
+        BotSum=0;
+        for(let j =0; j < 5; j++){
+            BotSum += BotSolbd[i][j];
+            if(BotSum == 4){
+
+            }
+        }
+    }
+    for(let i = 0; i < 5; i++){
+        BotSum=0;
+        for(let j =0; j < 5; j++){
+            BotSum += BotSolbd[j][i];
+            if(BotSum == 4){
+
+            }
+        }
+    }
+    BotSum=0;
+    for(let i = 0; i < 5; i++){
+        BotSum += BotSolbd[i][i];
+        if(BotSum == 4){
+
+        }
+    }
+    BotSum=0;
+    for(let i = 0; i < 5; i++){
+        BotSum += BotSolbd[i][4-i];
+        if(BotSum == 4){
+
+        }
+    }
 }
+// add value in both board solution
 function addValue(value){
   let k = 0, j = 0;
   for(let i = 0; i < 25; i++){
