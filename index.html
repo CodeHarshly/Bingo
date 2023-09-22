@@ -7,21 +7,41 @@
     <title>Bingo Game</title>
 </head>
 <body>
-    <h1>Bingo Game</h1>
-    <div id="bingo-board">
-        <!-- Bingo board cells will be generated dynamically using JavaScript -->
-    </div>
+    <h5><img src="images/Bingo.png" class="image"></h5>
     <div class="btn">
         <button id="start-button">Start Game</button>
-        <button id="reset-button">Reset Game</button>
+        <!--<button id="reset-button">Reset Game</button>-->
     </div>
-    <div class="grid-container" id="grid-container">
+        
+        <div class="grid-container" id="grid-container">
+
+        </div>
+        <div class="cross-line" id="cross-line">
+            <div class="horizontal-line"></div>
+            <div class="vertical-line"></div>
+          </div>
+        <div class="selectedNum" >
+            <div>
+                <div id="PlayerNum"></div>
+                <h3 id="fonthide1">You</h3> 
+            </div>   
+            <div>   
+                <div id="BotNum"></div>
+                <h3 id="fonthide2">Bot</h3>
+            </div>
+        </div>
+    
+    <div id="clicked-number">
+
+    </div>
+    <div id="wordContainer">
         
     </div>
-    <div id="clicked-number"></div>
-    <div id="wordContainer"></div>
-    <div class="grid-container1" id="grid-container1">
-        
+    <div id="clickXValue">Click X: </div>
+    <div id="clickYValue">Click Y: </div>
+
+    <!--<div class="grid-container1" id="grid-container1">
+    -->
     </div>
     <script src="script.js"></script>
 </body>

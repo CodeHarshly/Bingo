@@ -7,15 +7,21 @@ body {
     align-items: center;
 }
 
-h1 {
-    font-size: 24px;
+h5 {
     margin-bottom: 20px;
 }
-
+.image{
+    width: 50%;
+}
 .btn {
     padding: 10px 20px;
     font-size: 16px;
     margin: 10px;
+}
+.BingoContent {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 .grid-container {
     display: grid;
@@ -23,13 +29,16 @@ h1 {
     gap: 5px;
     width: 300px;
 }
-
+#grid-container {
+    display: none;
+}
 .grid-item {
     border: 1px solid #000;
-    padding: 15px 5px;
-    text-align: center;
-    font-size: 16px;
+    box-shadow: 3px 3px 8px #5f5f5f;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
+    background-size: cover;
 }
 .grid-container1 {
     display: grid;
@@ -44,4 +53,66 @@ h1 {
     text-align: center;
     font-size: 16px;
     cursor: pointer;
+}
+.cross-line {
+    position: absolute;
+    display: none;
+  }
+  
+  .horizontal-line,
+  .vertical-line {
+    position: absolute;
+    background-color: red;
+  }
+  .horizontal-line {
+    height: 2px; /* Adjust as needed */
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+  .vertical-line {
+    width: 2px; /* Adjust as needed */
+    height: 100%;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+  
+.selectedNum{
+    width: 260px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 90px auto;
+}
+#PlayerNum{
+    border: 1px solid #000;
+    box-shadow: 3px 3px 8px #5f5f5f;
+    width: 40px;
+    height: 40px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+#BotNum{
+    border: 1px solid #000;
+    box-shadow: 3px 3px 8px #5f5f5f;
+    width: 40px;
+    height: 40px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+#fonthide1 {
+    display: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+#fonthide2 {
+    display: none;
+    font-size: 16px;
+    font-weight: 500;
 }
