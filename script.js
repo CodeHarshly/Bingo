@@ -20,7 +20,7 @@ function shuffleArray(array) {
         }
     }
 
-    // Display the Bot updated array
+    // Display the Bot updated array 
     for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 5; j++) {
             const gridItem2 = document.createElement('div');
@@ -30,7 +30,18 @@ function shuffleArray(array) {
         }
     }
 }
-*/
+function resetgame(){
+    playAgain.addEventListener('click', () => {
+        location.reload();
+        Options.style.display = 'flex';
+        Gamecontent.style.display = 'none';
+        PlayerCont.style.display = 'none';
+        BotContent.style.display = 'none';
+        fonthide1.style.display = 'none';
+        fonthide2.style.display = 'none';
+        playAgain.style.display = 'none';
+    });
+}*/
 
 function checkWinner(){
     // check player board
@@ -149,6 +160,7 @@ function addValue(value){
     }
   }
   win = checkWinner();
+  
   for(let i = 0; i < 25; i++){
     if(BotBoard[i] == value){
         if(i >= 20 && i <= 24){
@@ -179,30 +191,324 @@ function addValue(value){
     }
   }
    win = checkWinner();
+   
   //updateGrid();
 }
+
+function MatchBotNum(x,y){
+    let k, value;
+    k= (x * 5)+ y;
+    value = BotBoard[k];
+    return value;
+}
+//bot brain
 function botturn(){
-    let whilecheck = true;
-    while(whilecheck){
-        let check= true;
-        const randomNumber = Math.floor(Math.random() * 25) + 1;
-        for(let i = 0; i < UsedNumber.length; i++){
-            if(UsedNumber[i] == randomNumber)
-            {
-                check = false;
-                break;
+    let exits = true;
+    let RowSum = 0,ColSum = 0,DiagnolSum = 0,RevDiaSum = 0,randomNumber = 0;
+    // for checking if it is making 4
+    for(let i = 0; i < 5; i++){
+        RowSum = 0;
+        for(let j =0; j < 5; j++){
+            RowSum += BotSolbd[i][j];
+        }
+        if(RowSum == 4 && levelOption == 3){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[i][j] == 0){
+                    BotSolbd[i][j] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(i,j);
+                    break;
+                }
             }
         }
-        if(check){
-            UsedNumber.push(randomNumber);
-            document.getElementById("BotNum").innerHTML = randomNumber;
-            addValue(randomNumber);
-            whilecheck = false;
+        if(!exits){ 
+            break; 
+        }
+        
+        ColSum = 0;
+        for(let j =0; j < 5; j++){
+            ColSum += BotSolbd[j][i];
+        }
+        if(ColSum == 4 && levelOption == 3){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[j][i] == 0){
+                    BotSolbd[j][i] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(j,i);
+                    break;
+                }
+            }
+        }
+        if(!exits){ break; }
+    }
+    if(exits){
+        DiagnolSum = 0;
+        for(let j =0; j < 5; j++){
+            DiagnolSum += BotSolbd[j][j];
+        }
+        if(DiagnolSum == 4 && levelOption == 3){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[j][j] == 0){
+                    BotSolbd[j][j] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(j,j);
+                    break;
+                }
+            }
+        }
+        
+        RevDiaSum = 0;
+        for(let j =0; j < 5; j++){
+            RevDiaSum += BotSolbd[j][4-j];
+        }
+        if(RevDiaSum == 4 && levelOption == 3){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[j][4-j] == 0){
+                    BotSolbd[j][4-j] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(j,4-j);
+                    break;
+                }
+            }
         }
     }
+    // for checking if it is making 3
+    if(exits){
+        for(let i = 0; i < 5; i++){
         
+            RowSum = 0;
+            for(let j =0; j < 5; j++){
+                RowSum += BotSolbd[i][j];
+            }
+            if(RowSum == 3 && ( levelOption == 3 || levelOption == 2 ) ){
+                for(let j = 0; j < 5; j++){
+                    if(BotSolbd[i][j] == 0){
+                        BotSolbd[i][j] = 1;
+                        exits = false;
+                        randomNumber= MatchBotNum(i,j);
+                        break;
+                    }
+                }
+            }
+            if(!exits){ break; }
+        
+            ColSum = 0;
+            for(let j =0; j < 5; j++){
+                ColSum += BotSolbd[j][i];
+            }
+            if(ColSum == 3 && (levelOption == 3 || levelOption == 2 )){
+                for(let j = 0; j < 5; j++){
+                    if(BotSolbd[j][i] == 0){
+                        BotSolbd[j][i] = 1;
+                        exits = false;
+                       randomNumber= MatchBotNum(j,i);
+                       break;
+                    }
+                }
+            }
+            if(!exits){ break; }
+        }
+    }
+    if(exits){
+        
+        DiagnolSum = 0;
+        for(let j =0; j < 5; j++){
+            DiagnolSum += BotSolbd[j][j];
+        }
+        if(DiagnolSum == 3 && (levelOption == 3 || levelOption == 2 ) ){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[j][j] == 0){
+                    BotSolbd[j][j] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(j,j);
+                    break;
+                }
+            }
+        }
+        
+        RevDiaSum = 0;
+        for(let j =0; j < 5; j++){
+            RevDiaSum += BotSolbd[j][4-j];
+        }
+        if(RevDiaSum == 3 && (levelOption == 3 || levelOption == 2 )){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[j][4-j] == 0){
+                    BotSolbd[j][4-j] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(j,4-j);
+                    break;
+                }
+            }
+        }
+        
+    }
+    // for checking if it is making 2
+    if(exits){
+        for(let i = 0; i < 5; i++){
+        
+            RowSum = 0;
+            for(let j =0; j < 5; j++){
+                RowSum += BotSolbd[i][j];
+            }
+            if(RowSum == 2 && (levelOption == 3 || levelOption == 2 || levelOption == 1) ){
+                for(let j = 0; j < 5; j++){
+                    if(BotSolbd[i][j] == 0){
+                        BotSolbd[i][j] = 1;
+                       exits = false;
+                       randomNumber= MatchBotNum(i,j);
+                        break;
+                    }
+                }
+            }
+            if(!exits){ break; }
+        
+            ColSum = 0;
+            for(let j =0; j < 5; j++){
+            ColSum += BotSolbd[j][i];
+            }
+            if(ColSum == 2 && (levelOption == 3 || levelOption == 2 || levelOption == 1) ){
+                for(let j = 0; j < 5; j++){
+                    if(BotSolbd[j][i] == 0){
+                        BotSolbd[j][i] = 1;
+                        exits = false;
+                        randomNumber= MatchBotNum(j,i);
+                        break;
+                    }
+                }
+            }
+            if(!exits){ break; }
+        }
+    }
+    if(exits){
+        DiagnolSum = 0;
+        for(let j =0; j < 5; j++){
+            DiagnolSum += BotSolbd[j][j];
+        }
+        if(DiagnolSum == 2 && (levelOption == 3 || levelOption == 2 || levelOption == 1) ){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[j][j] == 0){
+                    BotSolbd[j][j] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(j,j);
+                    break;
+                }
+            }
+        }
+        
+        RevDiaSum = 0;
+        for(let j =0; j < 5; j++){
+            RevDiaSum += BotSolbd[j][4-j];
+        }
+        if(RevDiaSum == 2 && (levelOption == 3 || levelOption == 2 || levelOption == 1) ){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[j][4-j] == 0){
+                    BotSolbd[j][4-j] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(j,4-j);
+                    break;
+                }
+            }
+        }
+        
+    }
+    // for checking if it is making 1
+    if(exits){
+        for(let i = 0; i < 5; i++){
+        
+            RowSum = 0;
+            for(let j =0; j < 5; j++){
+                RowSum += BotSolbd[i][j];
+             }
+            if(RowSum == 1 && (levelOption == 3 || levelOption == 2 || levelOption == 1) ){
+                for(let j = 0; j < 5; j++){
+                    if(BotSolbd[i][j] == 0){
+                        BotSolbd[i][j] = 1;
+                        exits = false;
+                        randomNumber= MatchBotNum(i,j);
+                        break;
+                    }
+                }
+            }
+            if(!exits){ break; }
+        
+            ColSum = 0;
+            for(let j =0; j < 5; j++){
+                ColSum += BotSolbd[j][i];
+            }
+            if(ColSum == 1 && (levelOption == 3 || levelOption == 2 || levelOption == 1) ){
+                for(let j = 0; j < 5; j++){
+                    if(BotSolbd[j][i] == 0){
+                        BotSolbd[j][i] = 1;
+                        exits = false;
+                        randomNumber= MatchBotNum(j,i);
+                        break;
+                    }
+                }
+            }
+            if(!exits){ break; }
+        }
+    }
+    if(exits){
+        DiagnolSum = 0;
+        for(let j =0; j < 5; j++){
+            DiagnolSum += BotSolbd[j][j];
+        }
+        if(DiagnolSum == 1 && (levelOption == 3 || levelOption == 2 || levelOption == 1) ){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[j][j] == 0){
+                    BotSolbd[j][j] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(j,j);
+                    break;
+                }
+            }
+        }
+        
+        RevDiaSum = 0;
+        for(let j =0; j < 5; j++){
+                RevDiaSum += BotSolbd[j][4-j];
+        }
+        if(RevDiaSum == 1 && (levelOption == 3 || levelOption == 2 || levelOption == 1) ){
+            for(let j = 0; j < 5; j++){
+                if(BotSolbd[j][4-j] == 0){
+                    BotSolbd[j][4-j] = 1;
+                    exits = false;
+                    randomNumber= MatchBotNum(j,4-j);
+                    break;
+                }
+            }
+        }
+    }
+
+    if(!exits){ 
+        UsedNumber.push(randomNumber);
+        document.getElementById("BotNum").innerHTML = randomNumber;
+        addValue(randomNumber);
+    }
+    // for taking random number 
+    if(exits && (levelOption == 2 || levelOption == 1) ){
+        let whilecheck = true;
+        while(whilecheck){
+           let check= true;
+            const randomNumber1 = Math.floor(Math.random() * 25) + 1;
+            for(let i = 0; i < UsedNumber.length; i++){
+                if(UsedNumber[i] == randomNumber1)
+                {
+                    check = false;
+                    break;
+                }
+            }
+            if(check){
+                UsedNumber.push(randomNumber1);
+                document.getElementById("BotNum").innerHTML = randomNumber1;
+                addValue(randomNumber1);
+                whilecheck = false;
+            }
+        }
+    }
 }
 
+//display cut image 
 function displayImageAtPosition(src, x, y) {
     const image = new Image();
     image.src = src;
@@ -213,6 +519,7 @@ function displayImageAtPosition(src, x, y) {
     container.appendChild(image);
 }
 
+/********************* VARIABLES *********************/
 
 // Create an board for player and bot 
 const playerBoard = Array.from({ length: 25 }, (_, i) => i + 1); // filled with 1 to 25 number in ascending order
@@ -237,8 +544,10 @@ let BotSolbd = [
 let PlayerSum;
 let BotSum;
 let win = false;
-var wordContainer = document.getElementById("wordContainer");
 
+var wordContainer = document.getElementById("wordContainer");
+var wordContainer1 = document.getElementById("wordContainer1");
+let levelOption;
 // Shuffle the element randomly
 shuffleArray(playerBoard);
 shuffleArray(BotBoard);
@@ -263,12 +572,13 @@ for (let i = 0; i < 25; i++) {
     gridItem3.style.backgroundImage = `url(images/${number}.png)`;
     
     gridContainer.appendChild(gridItem3);
-}*/
-//const gridContainer1 = document.getElementById('grid-container1');
-
+}
+const gridContainer1 = document.getElementById('grid-container1');
+*/
 const crossLine = document.getElementById('cross-line');
 
 
+let k =0;
 // Display bot board by Creating and appending grid items with shuffled numbers
 //updateGrid();
 
@@ -279,10 +589,16 @@ const gridItems = document.querySelectorAll('.grid-item');
 const clickedNumber = document.getElementById('clicked-number');
 
 // Add a click event listener to each grid item
+
+if(k>0){
+    var word1 = "ufd";
+    wordContainer1.innerHTML = word1;
+}
 gridItems.forEach((item) => {
     item.addEventListener('click', (event) => {
         // Get the clicked number
         if(!win){
+            
             const backgroundImage = item.style.backgroundImage;
             const clickedNum = parseInt(backgroundImage.match(/\d+/)[0]);
 
@@ -320,27 +636,73 @@ gridItems.forEach((item) => {
                 botturn();
             }
         }  
+        
     });
 });
 // Get the grid container and cross-line element
 //const gridContainer = document.getElementById('grid-container');
 
-
+document.addEventListener('DOMContentLoaded', function(){
 const startGame = document.getElementById('start-button');
+const playAgain = document.getElementById('reset-button');
+const Options = document.getElementById('level');
 const Gamecontent = document.getElementById('grid-container');
 const PlayerCont = document.getElementById('PlayerNum');
 const BotContent = document.getElementById('BotNum');
 const fonthide1 = document.getElementById('fonthide1');
 const fonthide2 = document.getElementById('fonthide2');
+const levelEasy = document.getElementById('Easy');
+const levelMedium = document.getElementById('Medium');
+const levelHard = document.getElementById('Hard');
 
-
-startGame.addEventListener('click', () => {
+//for easy level
+levelEasy.addEventListener('click', () => {
     //console.log('Button clicked');
-    startGame.style.display = 'none';
+    Options.style.display = 'none';
     Gamecontent.style.display = 'grid';
     PlayerCont.style.display = 'flex';
     BotContent.style.display = 'flex';
     fonthide1.style.display = 'block';
     fonthide2.style.display = 'block';
+    playAgain.style.display = 'block';
+    levelOption = 1;
+});
+
+//for medium level
+levelMedium.addEventListener('click', () => {
+    //console.log('Button clicked');
+    Options.style.display = 'none';
+    Gamecontent.style.display = 'grid';
+    PlayerCont.style.display = 'flex';
+    BotContent.style.display = 'flex';
+    fonthide1.style.display = 'block';
+    fonthide2.style.display = 'block';
+    playAgain.style.display = 'block';
+    levelOption = 2;
+});
+
+//for hard level
+levelHard.addEventListener('click', () => {
+    //console.log('Button clicked');
+    Options.style.display = 'none';
+    Gamecontent.style.display = 'grid';
+    PlayerCont.style.display = 'flex';
+    BotContent.style.display = 'flex';
+    fonthide1.style.display = 'block';
+    fonthide2.style.display = 'block';
+    playAgain.style.display = 'block';
+    levelOption = 3;
+});
+playAgain.addEventListener('click', () => {
+    location.reload();
+});
+
+
+// start to level page
+startGame.addEventListener('click', () => {
+    //console.log('Button clicked');
+    startGame.style.display = 'none';
+    Options.style.display = 'flex';
     
+});
 });
