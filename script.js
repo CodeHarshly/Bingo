@@ -645,6 +645,10 @@ gridItems.forEach((item) => {
 document.addEventListener('DOMContentLoaded', function(){
 const startGame = document.getElementById('start-button');
 const playAgain = document.getElementById('reset-button');
+const rulesButton = document.getElementById('rule-button');
+const gamerules = document.getElementById('GameRules');
+const rulegoback = document.getElementById('RGoBack-button');
+const Optiongoback = document.getElementById('OGoBack-button');
 const Options = document.getElementById('level');
 const Gamecontent = document.getElementById('grid-container');
 const PlayerCont = document.getElementById('PlayerNum');
@@ -697,11 +701,37 @@ playAgain.addEventListener('click', () => {
     location.reload();
 });
 
+// for going back
+Optiongoback.addEventListener('click', () => {
+    //console.log('Button clicked');
+    startGame.style.display = 'flex';
+    rulesButton.style.display = 'flex';
+    Options.style.display = 'none';
+    
+    
+});
+rulegoback.addEventListener('click', () => {
+    //console.log('Button clicked');
+    startGame.style.display = 'flex';
+    rulesButton.style.display = 'flex';
+    gamerules.style.display = 'none';
+    
+    
+});
+//for game rules
+rulesButton.addEventListener('click', () => {
+    //console.log('Button clicked');
+    startGame.style.display = 'none';
+    rulesButton.style.display = 'none';
+    gamerules.style.display = 'flex';
+    
+});
 
 // start to level page
 startGame.addEventListener('click', () => {
     //console.log('Button clicked');
     startGame.style.display = 'none';
+    rulesButton.style.display = 'none';
     Options.style.display = 'flex';
     
 });
