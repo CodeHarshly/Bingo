@@ -128,7 +128,7 @@ function checkWinner(){
     }
 }
 // add value in both board solution
-function addValue(value){
+function addValueP(value){
   let k = 0, j = 0;
   for(let i = 0; i < 25; i++){
     if(playerBoard[i] == value){
@@ -160,7 +160,8 @@ function addValue(value){
     }
   }
   win = checkWinner();
-  
+}
+function addValueB(value){
   for(let i = 0; i < 25; i++){
     if(BotBoard[i] == value){
         if(i >= 20 && i <= 24){
@@ -483,7 +484,7 @@ function botturn(){
     if(!exits){ 
         UsedNumber.push(randomNumber);
         document.getElementById("BotNum").innerHTML = randomNumber;
-        addValue(randomNumber);
+        addValueB(randomNumber);
     }
     // for taking random number 
     if(exits && (levelOption == 2 || levelOption == 1) ){
@@ -524,7 +525,8 @@ function displayImageAtPosition(src, x, y) {
 // Create an board for player and bot 
 const playerBoard = Array.from({ length: 25 }, (_, i) => i + 1); // filled with 1 to 25 number in ascending order
 const BotBoard = Array.from({ length: 25 }, (_, i) => i + 1);  // filled with 1 to 25 number in ascending order
-let UsedNumber = []; //Array.from({ length: 25 }, (_, i) => i + 1);  // filled with 1 to 25 number in ascending order
+let UsedNumber = []; 
+let UsedPyNumber = []; 
 //const UsedNumber = Array(25).fill(0); //filled with zero element
 //const BotSolbd = Array(25).fill(0);  //filled with zero element
 let PlayerSolbd = [
@@ -621,18 +623,38 @@ gridItems.forEach((item) => {
             
             // Display the clicked number below the grid
             //clickedNumber.textContent = `You clicked on number ${clickedNum}`;
-            let check = true;
+
+            let checkValue = true;
+            for(let i = 0; i < UsedPyNumber.length; i++){
+                if(UsedPyNumber[i] == clickedNum){
+                    checkValue = false;
+                    break;
+                }
+            }
+            if(checkValue){
+                for(let i = 0; i < UsedNumber.length; i++){
+                    if(UsedNumber[i] == clickedNum){
+                        UsedPyNumber.push(clickedNum);
+                        addValueP(clickedNum);
+                        checkValue = false;
+                        break;
+                    }
+                }
+            }
+            /*let check = true;
             for(let i = 0; i < UsedNumber.length; i++){
                 if(UsedNumber[i] == clickedNum)
                 {
                     check = false;
                     break;                  
                 }
-            }
-            if(check){
+            }*/
+            if(checkValue){
                 UsedNumber.push(clickedNum);
+                UsedPyNumber.push(clickedNum);
                 document.getElementById("PlayerNum").innerHTML = clickedNum;
-                addValue(clickedNum);
+                addValueP(clickedNum);
+                addValueB(clickedNum);
                 botturn();
             }
         }  
