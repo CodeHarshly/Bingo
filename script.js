@@ -502,7 +502,7 @@ function botturn(){
             if(check){
                 UsedNumber.push(randomNumber1);
                 document.getElementById("BotNum").innerHTML = randomNumber1;
-                addValue(randomNumber1);
+                addValueB(randomNumber1);
                 whilecheck = false;
             }
         }
