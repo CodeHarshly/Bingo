@@ -486,6 +486,15 @@ function botturn(){
         document.getElementById("BotNum").innerHTML = randomNumber;
         addValueB(randomNumber);
     }
+    if(exits && levelOption == 3){
+        if(BotSolbd[2][2] == 0){
+            BotSolbd[2][2] == 1;
+            UsedNumber.push(randomNumber);
+            document.getElementById("BotNum").innerHTML = randomNumber;
+            addValueB(randomNumber);
+            exits = false;
+        }
+    }
     // for taking random number 
     if(exits && (levelOption == 2 || levelOption == 1) ){
         let whilecheck = true;
