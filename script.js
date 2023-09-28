@@ -42,7 +42,22 @@ function resetgame(){
         playAgain.style.display = 'none';
     });
 }*/
+/*function checkWinner1(){
+    TotalSum = 0;
+    for(let i = 0;i < 5; i++){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += PlayerSolbd[i][j];
+            TotalSum += PlayerSum;
+            if(TotalSum == 20){
+                for(let j = 0;j < 5; j++){
+                    if(PlayerSolbd[i][j] == 1){}
+                }
+            }
 
+        }
+    }
+}*/
 function checkWinner(){
     // check player board
     for(let i = 0; i < 5; i++){
@@ -555,6 +570,7 @@ let BotSolbd = [
 ];
 let PlayerSum;
 let BotSum;
+let TotalSum;
 let win = false;
 
 var wordContainer = document.getElementById("wordContainer");
