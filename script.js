@@ -568,7 +568,7 @@ shuffleArray(BotBoard);
 const gridContainer = document.getElementById('grid-container');
 
 // Display player board by Creating and appending grid items with shuffled numbers
-const gridContainer1 = document.getElementById('grid-container1');
+//const gridContainer1 = document.getElementById('grid-container1');
 for (let i = 0; i < 25; i++) {
     const gridItem = document.createElement('div');
     gridItem.classList.add('grid-item');
@@ -577,7 +577,7 @@ for (let i = 0; i < 25; i++) {
     
     gridContainer.appendChild(gridItem);
 }
-for (let i = 0; i < 25; i++) {
+/*for (let i = 0; i < 25; i++) {
     const gridItem = document.createElement('div');
     gridItem.classList.add('grid-item');
     const number = BotBoard[i];
