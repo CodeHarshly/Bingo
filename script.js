@@ -488,7 +488,8 @@ function botturn(){
     }
     if(exits && levelOption == 3){
         if(BotSolbd[2][2] == 0){
-            BotSolbd[2][2] == 1;
+            BotSolbd[2][2] = 1;
+            randomNumber = BotBoard[12];
             UsedNumber.push(randomNumber);
             document.getElementById("BotNum").innerHTML = randomNumber;
             addValueB(randomNumber);
@@ -567,6 +568,7 @@ shuffleArray(BotBoard);
 const gridContainer = document.getElementById('grid-container');
 
 // Display player board by Creating and appending grid items with shuffled numbers
+const gridContainer1 = document.getElementById('grid-container1');
 for (let i = 0; i < 25; i++) {
     const gridItem = document.createElement('div');
     gridItem.classList.add('grid-item');
@@ -574,6 +576,14 @@ for (let i = 0; i < 25; i++) {
     gridItem.style.backgroundImage = `url(images/${number}.png)`;
     
     gridContainer.appendChild(gridItem);
+}
+for (let i = 0; i < 25; i++) {
+    const gridItem = document.createElement('div');
+    gridItem.classList.add('grid-item');
+    const number = BotBoard[i];
+    gridItem.style.backgroundImage = `url(images/${number}.png)`;
+    
+    gridContainer1.appendChild(gridItem);
 }
 // Display Bot board by Creating and appending grid items with shuffled numbers
 /*for (let i = 0; i < 25; i++) {
@@ -589,7 +599,7 @@ const gridContainer1 = document.getElementById('grid-container1');
 const crossLine = document.getElementById('cross-line');
 
 
-let k =0;
+let starter = Math.floor(Math.random() * 2) + 1;
 // Display bot board by Creating and appending grid items with shuffled numbers
 //updateGrid();
 
@@ -601,15 +611,13 @@ const clickedNumber = document.getElementById('clicked-number');
 
 // Add a click event listener to each grid item
 
-if(k>0){
-    var word1 = "ufd";
-    wordContainer1.innerHTML = word1;
-}
+
+
 gridItems.forEach((item) => {
     item.addEventListener('click', (event) => {
         // Get the clicked number
         if(!win){
-            
+            wordContainer.innerHTML = ' ';
             const backgroundImage = item.style.backgroundImage;
             const clickedNum = parseInt(backgroundImage.match(/\d+/)[0]);
 
@@ -622,7 +630,6 @@ gridItems.forEach((item) => {
             // Position the cross-line over the clicked grid item
             //crossLine.style.top = item.offsetTop + 'px';
             //crossLine.style.left = item.offsetLeft + 'px';
-
             // Display the cross-line
             displayImageAtPosition('images/Cut.png', clickX, clickY);
             //crossLine.style.display = 'block';
@@ -701,6 +708,12 @@ levelEasy.addEventListener('click', () => {
     fonthide2.style.display = 'block';
     playAgain.style.display = 'block';
     levelOption = 1;
+    if(starter == 2){
+        botturn();
+        wordContainer.innerHTML = 'Bot started the Match';
+    } else {
+        wordContainer.innerHTML = 'Click on any number to start the match!';
+    }
 });
 
 //for medium level
@@ -714,6 +727,12 @@ levelMedium.addEventListener('click', () => {
     fonthide2.style.display = 'block';
     playAgain.style.display = 'block';
     levelOption = 2;
+    if(starter == 2){
+        botturn();
+        wordContainer.innerHTML = 'Bot started the Match';
+    } else {
+        wordContainer.innerHTML = 'Click on any number to start the match!';
+    }
 });
 
 //for hard level
@@ -727,6 +746,12 @@ levelHard.addEventListener('click', () => {
     fonthide2.style.display = 'block';
     playAgain.style.display = 'block';
     levelOption = 3;
+    if(starter == 2){
+        botturn();
+        wordContainer.innerHTML = 'Bot started the Match';
+    } else {
+        wordContainer.innerHTML = 'Click on any number to start the match!';
+    }
 });
 playAgain.addEventListener('click', () => {
     location.reload();
