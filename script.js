@@ -43,6 +43,7 @@ function resetgame(){
     });
 }*/
 function checkWinner1(turn){
+    let TotalSum = 0;
     let bothboard = [
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -54,6 +55,7 @@ function checkWinner1(turn){
         for(let i = 0; i < 5; i++){
             for (let j = 0; j < 5; j++) {
             bothboard[i][j] = PlayerSolbd[i][j];
+            TotalSum = TotalPlayerSum;
             }
         }
     }
@@ -61,6 +63,7 @@ function checkWinner1(turn){
         for(let i = 0; i < 5; i++){
             for (let j = 0; j < 5; j++) {
             bothboard[i][j] = BotSolbd[i][j];
+            TotalSum = TotalBotSum;
             }
         }
     }
@@ -70,7 +73,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[0][j];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             row1 = false;
         }
     }
@@ -80,7 +83,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[1][j];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             row2 = false;
         }
     }
@@ -90,7 +93,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[2][j];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             row3 = false;
         }
     }
@@ -100,7 +103,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[3][j];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             row4 = false;
         }
     }
@@ -110,7 +113,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[4][j];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             row5 = false;
         }
     }
@@ -120,7 +123,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[j][0];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             col1 = false;
         }
     }
@@ -130,7 +133,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[j][1];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             col2 = false;
         }
     }
@@ -140,7 +143,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[j][2];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             col3 = false;
         }
     }
@@ -150,7 +153,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[j][3];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             col4 = false;
         }
     }
@@ -160,7 +163,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[j][4];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             col5 = false;
         }
     }
@@ -170,7 +173,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[j][j];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             diag1 = false;
         }
     }
@@ -180,7 +183,7 @@ function checkWinner1(turn){
             PlayerSum += bothboard[j][4-j];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             diag2 = false;
         }
     }
@@ -190,21 +193,23 @@ function checkWinner1(turn){
             PlayerSum += bothboard[j][4];
         }
         if(PlayerSum == 5){
-            TotalPalyerSum += 1;
+            TotalSum += 1;
             col5 = false;
         }
     }
-    
-    
-    if(TotalPalyerSum == 5){
-        if(turn == 1){
-            wordContainer.innerHTML = 'You win!';
-            return true;
-        }
-        else if (turn == 2){
-            wordContainer.innerHTML = 'Bot win!';
-            return true;
-        }
+    if(turn == 1){
+        TotalPlayerSum = TotalSum;
+    }
+    else if (turn == 2){
+        TotalBotSum = TotalSum;
+    }
+    if(TotalPlayerSum == 5){
+        wordContainer.innerHTML = 'You win!';
+        return true;
+    }
+    else if (TotalBotSum == 5){
+        wordContainer.innerHTML = 'Bot win!';
+        return true;
     }
     else{
         return false;
@@ -732,7 +737,8 @@ let BotSolbd = [
 ];
 let PlayerSum;
 let BotSum;
-let TotalPalyerSum = 0;
+
+let TotalPlayerSum = 0;
 let TotalBotSum = 0;
 let win = false, row1 = true, row2 = true, row3 = true, row4 = true, row5 = true;
 let diag1 = true, diag2 = true, col1 = true, col2 = true, col3 = true, col4 = true, col5 = true;
