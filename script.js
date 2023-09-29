@@ -42,22 +42,174 @@ function resetgame(){
         playAgain.style.display = 'none';
     });
 }*/
-/*function checkWinner1(){
-    TotalSum = 0;
-    for(let i = 0;i < 5; i++){
-        PlayerSum=0;
-        for(let j = 0;j < 5; j++){
-            PlayerSum += PlayerSolbd[i][j];
-            TotalSum += PlayerSum;
-            if(TotalSum == 20){
-                for(let j = 0;j < 5; j++){
-                    if(PlayerSolbd[i][j] == 1){}
-                }
+function checkWinner1(turn){
+    let bothboard = [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0]
+    ];
+    if(turn == 1){
+        for(let i = 0; i < 5; i++){
+            for (let j = 0; j < 5; j++) {
+            bothboard[i][j] = PlayerSolbd[i][j];
             }
-
         }
     }
-}*/
+    else if(turn == 2){
+        for(let i = 0; i < 5; i++){
+            for (let j = 0; j < 5; j++) {
+            bothboard[i][j] = BotSolbd[i][j];
+            }
+        }
+    }
+    if(row1){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[0][j];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            row1 = false;
+        }
+    }
+    if(row2){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[1][j];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            row2 = false;
+        }
+    }
+    if(row3){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[2][j];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            row3 = false;
+        }
+    }
+    if(row4){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[3][j];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            row4 = false;
+        }
+    }
+    if(row5){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[4][j];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            row5 = false;
+        }
+    }
+    if(col1){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[j][0];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            col1 = false;
+        }
+    }
+    if(col2){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[j][1];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            col2 = false;
+        }
+    }
+    if(col3){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[j][2];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            col3 = false;
+        }
+    }
+    if(col4){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[j][3];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            col4 = false;
+        }
+    }
+    if(col5){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[j][4];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            col5 = false;
+        }
+    }
+    if(diag1){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[j][j];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            diag1 = false;
+        }
+    }
+    if(diag2){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[j][4-j];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            diag2 = false;
+        }
+    }
+    if(col5){
+        PlayerSum=0;
+        for(let j = 0;j < 5; j++){
+            PlayerSum += bothboard[j][4];
+        }
+        if(PlayerSum == 5){
+            TotalPalyerSum += 1;
+            col5 = false;
+        }
+    }
+    
+    
+    if(TotalPalyerSum == 5){
+        if(turn == 1){
+            wordContainer.innerHTML = 'You win!';
+            return true;
+        }
+        else if (turn == 2){
+            wordContainer.innerHTML = 'Bot win!';
+            return true;
+        }
+    }
+    else{
+        return false;
+    }
+}
 function checkWinner(){
     // check player board
     for(let i = 0; i < 5; i++){
@@ -144,70 +296,80 @@ function checkWinner(){
 }
 // add value in both board solution
 function addValueP(value){
-  let k = 0, j = 0;
-  for(let i = 0; i < 25; i++){
-    if(playerBoard[i] == value){
-        if(i >= 20 && i <= 24){
-            k = 4;
-            j = i - 20;
-            PlayerSolbd[k][j] = 1;
-        }
-        else if(i >= 15 && i <= 19){
-            k = 3;
-            j = i - 15;
-            PlayerSolbd[k][j] = 1;
-        }
-         else if(i >= 10 && i <= 14) {
-            k = 2;
-            j = i - 10;
-            PlayerSolbd[k][j] = 1;
-        }
-        else if(i >= 5 && i <= 9){
-            k = 1;
-            j = i - 5;
-            PlayerSolbd[k][j] = 1;
-        }
-        else if(i >= 0 && i <= 4){
-            k = 0;
-            j = i;
-            PlayerSolbd[k][j] = 1;
+    let k = 0, j = 0;
+    for(let i = 0; i < 25; i++){
+        if(playerBoard[i] == value){
+            if(i >= 20 && i <= 24){
+                k = 4;
+                j = i - 20;
+                PlayerSolbd[k][j] = 1;
+            }
+            else if(i >= 15 && i <= 19){
+                k = 3;
+                j = i - 15;
+                PlayerSolbd[k][j] = 1;
+            }
+            else if(i >= 10 && i <= 14) {
+                k = 2;
+                j = i - 10;
+                PlayerSolbd[k][j] = 1;
+            }
+            else if(i >= 5 && i <= 9){
+                k = 1;
+                j = i - 5;
+                PlayerSolbd[k][j] = 1;
+            }
+            else if(i >= 0 && i <= 4){
+                k = 0;
+                j = i;
+                PlayerSolbd[k][j] = 1;
+            }
         }
     }
-  }
-  win = checkWinner();
+    if( levelOption == 3){
+        win = checkWinner1(1);
+    }
+    else{
+        win = checkWinner();
+    }
 }
 function addValueB(value){
-  for(let i = 0; i < 25; i++){
-    if(BotBoard[i] == value){
-        if(i >= 20 && i <= 24){
-            k = 4;
-            j = i - 20;
-            BotSolbd[k][j] = 1;
-        }
-        else if(i >= 15 && i <= 19){
-            k = 3;
-            j = i - 15;
-            BotSolbd[k][j] = 1;
-        }
-        else if(i >= 10 && i <= 14) {
-            k = 2;
-            j = i - 10;
-            BotSolbd[k][j] = 1;
-        }
-        else if(i >= 5 && i <= 9){
-            k = 1;
-            j = i - 5;
-            BotSolbd[k][j] = 1;
-        }
-        else if(i >= 0 && i <= 4){
-            k = 0;
-            j = i;
-            BotSolbd[k][j] = 1;
+    let k = 0, j = 0;
+    for(let i = 0; i < 25; i++){
+        if(BotBoard[i] == value){
+            if(i >= 20 && i <= 24){
+                k = 4;
+                j = i - 20;
+                BotSolbd[k][j] = 1;
+            }
+            else if(i >= 15 && i <= 19){
+                k = 3;
+                j = i - 15;
+               BotSolbd[k][j] = 1;
+            }
+            else if(i >= 10 && i <= 14) {
+                k = 2;
+                j = i - 10;
+                BotSolbd[k][j] = 1;
+            }
+            else if(i >= 5 && i <= 9){
+                k = 1;
+                j = i - 5;
+                BotSolbd[k][j] = 1;
+            }
+            else if(i >= 0 && i <= 4){
+                k = 0;
+                j = i;
+                BotSolbd[k][j] = 1;
+            }
         }
     }
-  }
-   win = checkWinner();
-   
+    if(levelOption == 3){
+        win = checkWinner1(2);
+    }
+    else{
+        win = checkWinner();
+    }
   //updateGrid();
 }
 
@@ -227,7 +389,7 @@ function botturn(){
         for(let j =0; j < 5; j++){
             RowSum += BotSolbd[i][j];
         }
-        if(RowSum == 4 && levelOption == 3){
+        if(RowSum == 4 && ( levelOption == 3 || levelOption == 2 )){
             for(let j = 0; j < 5; j++){
                 if(BotSolbd[i][j] == 0){
                     BotSolbd[i][j] = 1;
@@ -245,7 +407,7 @@ function botturn(){
         for(let j =0; j < 5; j++){
             ColSum += BotSolbd[j][i];
         }
-        if(ColSum == 4 && levelOption == 3){
+        if(ColSum == 4 && ( levelOption == 3 || levelOption == 2 )){
             for(let j = 0; j < 5; j++){
                 if(BotSolbd[j][i] == 0){
                     BotSolbd[j][i] = 1;
@@ -262,7 +424,7 @@ function botturn(){
         for(let j =0; j < 5; j++){
             DiagnolSum += BotSolbd[j][j];
         }
-        if(DiagnolSum == 4 && levelOption == 3){
+        if(DiagnolSum == 4 && ( levelOption == 3 || levelOption == 2 )){
             for(let j = 0; j < 5; j++){
                 if(BotSolbd[j][j] == 0){
                     BotSolbd[j][j] = 1;
@@ -277,7 +439,7 @@ function botturn(){
         for(let j =0; j < 5; j++){
             RevDiaSum += BotSolbd[j][4-j];
         }
-        if(RevDiaSum == 4 && levelOption == 3){
+        if(RevDiaSum == 4 && ( levelOption == 3 || levelOption == 2 )){
             for(let j = 0; j < 5; j++){
                 if(BotSolbd[j][4-j] == 0){
                     BotSolbd[j][4-j] = 1;
@@ -501,7 +663,7 @@ function botturn(){
         document.getElementById("BotNum").innerHTML = randomNumber;
         addValueB(randomNumber);
     }
-    if(exits && levelOption == 3){
+    if(exits && ( levelOption == 3 || levelOption == 2 )){
         if(BotSolbd[2][2] == 0){
             BotSolbd[2][2] = 1;
             randomNumber = BotBoard[12];
@@ -512,7 +674,7 @@ function botturn(){
         }
     }
     // for taking random number 
-    if(exits && (levelOption == 2 || levelOption == 1) ){
+    if(exits && levelOption == 1){
         let whilecheck = true;
         while(whilecheck){
            let check= true;
@@ -570,9 +732,11 @@ let BotSolbd = [
 ];
 let PlayerSum;
 let BotSum;
-let TotalSum;
-let win = false;
-
+let TotalPalyerSum = 0;
+let TotalBotSum = 0;
+let win = false, row1 = true, row2 = true, row3 = true, row4 = true, row5 = true;
+let diag1 = true, diag2 = true, col1 = true, col2 = true, col3 = true, col4 = true, col5 = true;
+let turn;
 var wordContainer = document.getElementById("wordContainer");
 var wordContainer1 = document.getElementById("wordContainer1");
 let levelOption;
