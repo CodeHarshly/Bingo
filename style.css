@@ -158,16 +158,20 @@ h5 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    filter: drop-shadow(5px 5px 5px #747474);
+    filter: drop-shadow(5px 5px 6px #747474);
     max-width: 600px;
 }
-.GameRules h3{
+.GameRules h2{
     text-align: center;
     color:#ff4321;
     
 }
-.GameRules h4{
+.GameRules h3{
     text-align: center;
+    
+}
+.GameRules h4{
+    text-align: start;
     
 }
 .GameRules p{
