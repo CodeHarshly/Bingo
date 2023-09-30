@@ -187,16 +187,7 @@ function checkWinner1(turn){
             diag2 = false;
         }
     }
-    if(col5){
-        PlayerSum=0;
-        for(let j = 0;j < 5; j++){
-            PlayerSum += bothboard[j][4];
-        }
-        if(PlayerSum == 5){
-            TotalSum += 1;
-            col5 = false;
-        }
-    }
+    
     if(turn == 1){
         TotalPlayerSum = TotalSum;
     }
@@ -207,13 +198,13 @@ function checkWinner1(turn){
         wordContainer.innerHTML = 'You win!';
         return true;
     }
-    else if (TotalBotSum == 5){
+    if (TotalBotSum == 5){
         wordContainer.innerHTML = 'Bot win!';
         return true;
     }
-    else{
-        return false;
-    }
+    
+    return false;
+    
 }
 function checkWinner(){
     // check player board
